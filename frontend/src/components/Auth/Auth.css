@@ -1,0 +1,141 @@
+.auth-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  background: radial-gradient(circle at 20% 20%, rgba(102, 126, 234, 0.2), transparent 35%),
+              radial-gradient(circle at 80% 0%, rgba(118, 75, 162, 0.18), transparent 30%),
+              #0f172a;
+  color: #e2e8f0;
+}
+
+.auth-hero {
+  padding: 56px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  justify-content: center;
+}
+
+.brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5f5;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.auth-hero h1 {
+  font-size: 34px;
+  line-height: 1.3;
+  margin: 0;
+  color: #f8fafc;
+}
+
+.hero-sub {
+  color: #cbd5e1;
+  max-width: 520px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.hero-bullets {
+  display: grid;
+  gap: 10px;
+  color: #e2e8f0;
+}
+
+.hero-bullets .dot {
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.meta-pill {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.auth-card {
+  background: #ffffff;
+  color: #0f172a;
+  padding: 40px;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.25);
+  width: 100%;
+  max-width: 420px;
+}
+
+.auth-card-header h2 {
+  margin: 0 0 6px;
+  font-size: 24px;
+  color: #111827;
+}
+
+.auth-card-header p {
+  margin: 0 0 22px;
+  color: #6b7280;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #111827;
+}
+
+.auth-card .btn.full {
+  width: 100%;
+}
+
+.auth-link {
+  text-align: center;
+  margin-top: 20px;
+  color: #4b5563;
+}
+
+.auth-link a {
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-link a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .auth-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-container {
+    padding: 28px;
+  }
+
+  .auth-hero {
+    padding: 32px 24px;
+  }
+}
