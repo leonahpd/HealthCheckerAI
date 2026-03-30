@@ -23,7 +23,12 @@ spec:
             - name: PORT
               value: "5000"
             - name: JWT_SECRET
-              value: "supersecretkey123" 
+              value: "supersecretkey123"
+            - name: HUGGINGFACE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: hf-secret
+                  key: HUGGINGFACE_API_KEY 
 ---
 apiVersion: v1
 kind: Service
@@ -37,3 +42,11 @@ spec:
     - port: 5000        # internal service port
       targetPort: 5000
       nodePort: 30007   # external access
+---
+#apiVersion: v1
+#data:
+#  HUGGINGFACE_API_KEY: aGZfTEZvbU1sU0RRUkhIbGh4cllGSnJpaXRScWtaaWtscXhxcQ==
+#kind: Secret
+#metadata:
+#  name: hf-secret
+#type: Opaque

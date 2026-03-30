@@ -1,27 +1,22 @@
 const express = require('express');
 const router = express.Router();
-const { body } = require('express-validator');
 const symptomController = require('../controllers/symptomController');
-const auth = require('../middleware/auth');
+const authMiddleware = require('../middleware/auth');
 
-// All routes require authentication
-router.use(auth);
+// --------------------
+// Routes for Symptoms
+// --------------------
 
-// Create symptom query
-router.post('/', [
-  body('patientId').notEmpty().withMessage('Patient ID is required'),
-  body('symptoms').isArray({ min: 1 }).withMessage('At least one symptom is required'),
-  body('duration').trim().notEmpty().withMessage('Duration is required'),
-  body('severity').isIn(['mild', 'moderate', 'severe']).withMessage('Valid severity is required')
-], symptomController.createSymptomQuery);
+// Create a new symptom query
+router.post('/', authMiddleware, symptomController.createSymptomQuery);
 
-// Get all symptom queries
-router.get('/', symptomController.getAllSymptomQueries);
+// Get patient symptom history (more specific route first!)
+router.get('/history/:patientId', authMiddleware, symptomController.getPatientSymptomHistory);
 
-// Get single symptom query
-router.get('/:id', symptomController.getSymptomQuery);
+// Get a single symptom query by ID
+router.get('/:id', authMiddleware, symptomController.getSymptomQuery);
 
-// Get patient symptom history
-router.get('/patient/:patientId', symptomController.getPatientSymptomHistory);
+// Get all symptom queries for the logged-in user
+router.get('/', authMiddleware, symptomController.getAllSymptomQueries);
 
 module.exports = router;
