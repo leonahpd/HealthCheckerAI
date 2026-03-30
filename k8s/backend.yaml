@@ -43,10 +43,3 @@ spec:
       targetPort: 5000
       nodePort: 30007   # external access
 ---
-#apiVersion: v1
-#data:
-#  HUGGINGFACE_API_KEY: aGZfTEZvbU1sU0RRUkhIbGh4cllGSnJpaXRScWtaaWtscXhxcQ==
-#kind: Secret
-#metadata:
-#  name: hf-secret
-#type: Opaque
