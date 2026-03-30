@@ -22,14 +22,18 @@ spec:
               value: "mongodb://mongodb-service:27017/health_ai"
             - name: PORT
               value: "5000"
+            - name: JWT_SECRET
+              value: "supersecretkey123" 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: backend-service
 spec:
+  type: NodePort   # ✅ ADD THIS
   selector:
     app: backend
   ports:
-    - port: 80
+    - port: 5000        # internal service port
       targetPort: 5000
+      nodePort: 30007   # external access
