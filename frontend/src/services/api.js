@@ -18,9 +18,7 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 // Handle response errors
@@ -34,5 +32,22 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+// ✅ Named exports for your services
+export const getPatients = async () => {
+  const res = await api.get('/patients');
+  return res.data;
+};
+
+export const createSymptomQuery = async (data) => {
+  const res = await api.post('/symptoms', data);
+  return res.data;
+};
+
+// Optional: if you need getSymptomResponse
+export const getSymptomResponse = async (queryData) => {
+  const res = await api.post('/symptoms/response', queryData);
+  return res.data;
+};
 
 export default api;

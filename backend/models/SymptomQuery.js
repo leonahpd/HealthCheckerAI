@@ -20,7 +20,13 @@ const symptomQuerySchema = new mongoose.Schema({
     required: true
   },
   aiResponse: {
-    possibleConditions: [String],
+    possibleConditions: [
+      {
+        disease: String,
+        confidence: Number,
+        suggestion: String
+      }
+    ],
     recommendations: [String],
     urgencyLevel: String,
     disclaimer: String

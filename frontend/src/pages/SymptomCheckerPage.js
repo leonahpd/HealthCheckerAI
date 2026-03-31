@@ -14,6 +14,7 @@ const SymptomCheckerPage = () => {
     severity: 'mild'
   });
 
+  // Fetch patients on mount
   useEffect(() => {
     fetchPatients();
   }, []);
@@ -28,10 +29,7 @@ const SymptomCheckerPage = () => {
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -41,14 +39,11 @@ const SymptomCheckerPage = () => {
 
     try {
       const symptomsArray = formData.symptoms.split(',').map(s => s.trim());
-      const queryData = {
-        ...formData,
-        symptoms: symptomsArray
-      };
+      const queryData = { ...formData, symptoms: symptomsArray };
 
       const response = await createSymptomQuery(queryData);
       setResult(response.aiResponse);
-      
+
       // Reset form
       setFormData({
         patientId: '',
@@ -69,6 +64,7 @@ const SymptomCheckerPage = () => {
       <div className="symptom-checker-page">
         <h1>Symptom Checker</h1>
 
+        {/* Symptom Form */}
         <div className="symptom-form-container card">
           <h2>Enter Symptoms</h2>
           <form onSubmit={handleSubmit}>
@@ -133,38 +129,57 @@ const SymptomCheckerPage = () => {
           </form>
         </div>
 
+        {/* Analysis Results */}
         {result && (
           <div className="results-container card">
             <h2>Analysis Results</h2>
-            
-            <div className="result-section">
-              <h3>Possible Conditions</h3>
-              <ul>
-                {result.possibleConditions.map((condition, index) => (
-                  <li key={index}>{condition}</li>
-                ))}
-              </ul>
-            </div>
 
-            <div className="result-section">
-              <h3>Recommendations</h3>
-              <ul>
-                {result.recommendations.map((recommendation, index) => (
-                  <li key={index}>{recommendation}</li>
-                ))}
-              </ul>
-            </div>
+            {/* Possible Conditions */}
+            {result.possibleConditions?.length > 0 && (
+              <div className="result-section">
+                <h3>Possible Conditions</h3>
+                <ul>
+                  {result.possibleConditions.map((condition) => (
+                    <li key={condition._id || condition.disease}>
+                      {condition.disease} - Confidence: {condition.confidence * 100}%
+                      <br />
+                      Suggestion: {condition.suggestion}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
-            <div className="result-section">
-              <h3>Urgency Level</h3>
-              <p className={`urgency urgency-${result.urgencyLevel}`}>
-                {result.urgencyLevel.toUpperCase()}
-              </p>
-            </div>
+            {/* Recommendations */}
+            {result.recommendations?.length > 0 && (
+              <div className="result-section">
+                <h3>Recommendations</h3>
+                <ul>
+                  {result.recommendations.map((rec, index) => (
+                    <li key={rec._id || index}>
+                      {typeof rec === 'string' ? rec : rec.suggestion}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
-            <div className="disclaimer">
-              <strong>Disclaimer:</strong> {result.disclaimer}
-            </div>
+            {/* Urgency Level */}
+            {result.urgencyLevel && (
+              <div className="result-section">
+                <h3>Urgency Level</h3>
+                <p className={`urgency urgency-${result.urgencyLevel}`}>
+                  {result.urgencyLevel.toUpperCase()}
+                </p>
+              </div>
+            )}
+
+            {/* Disclaimer */}
+            {result.disclaimer && (
+              <div className="disclaimer">
+                <strong>Disclaimer:</strong> {result.disclaimer}
+              </div>
+            )}
           </div>
         )}
       </div>
