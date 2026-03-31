@@ -143,7 +143,7 @@ const SymptomCheckerPage = () => {
                     <li key={condition._id || condition.disease}>
                       {condition.disease} - Confidence: {condition.confidence * 100}%
                       <br />
-                      Suggestion: {condition.suggestion}
+
                     </li>
                   ))}
                 </ul>
