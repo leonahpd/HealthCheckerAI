@@ -22,13 +22,6 @@ spec:
               value: "mongodb://mongodb-service:27017/health_ai"
             - name: PORT
               value: "5000"
-            - name: JWT_SECRET
-              value: "supersecretkey123"
-            - name: HUGGINGFACE_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: hf-secret
-                  key: HUGGINGFACE_API_KEY 
 ---
 apiVersion: v1
 kind: Service
