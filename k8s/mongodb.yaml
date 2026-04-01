@@ -17,6 +17,10 @@ spec:
           image: mongo
           ports:
             - containerPort: 27017
+      tolerations:
+        - key: "node.kubernetes.io/disk-pressure"
+          operator: "Exists"
+          effect: "NoSchedule"
 ---
 apiVersion: v1
 kind: Service

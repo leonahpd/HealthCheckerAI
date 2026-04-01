@@ -40,15 +40,9 @@ const Login = () => {
           Secure patient workspace with AI-assisted assessments, activity tracking, and streamlined intake.
         </p>
         <div className="hero-bullets">
-          <div>
-            <span className="dot" /> AI-guided symptom summaries
-          </div>
-          <div>
-            <span className="dot" /> Patient management and history
-          </div>
-          <div>
-            <span className="dot" /> Privacy-first, JWT secured API
-          </div>
+          <div><span className="dot" /> AI-guided symptom summaries</div>
+          <div><span className="dot" /> Patient management and history</div>
+          <div><span className="dot" /> Privacy-first, JWT secured API</div>
         </div>
         <div className="hero-meta">
           <span className="meta-pill">Live • Connected</span>
@@ -63,6 +57,7 @@ const Login = () => {
             <h2>Welcome back</h2>
             <p>Log in to continue to your dashboard.</p>
           </div>
+
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Email</label>
@@ -74,6 +69,7 @@ const Login = () => {
                 required
               />
             </div>
+
             <div className="form-group">
               <label>Password</label>
               <input
@@ -84,11 +80,19 @@ const Login = () => {
                 required
               />
             </div>
+
+            {/* ✅ Forgot Password Link */}
+            <div className="forgot-password">
+              <Link to="/forgot-password">Forgot Password?</Link>
+            </div>
+
             {error && <div className="error">{error}</div>}
+
             <button type="submit" className="btn btn-primary full">
               Login
             </button>
           </form>
+
           <p className="auth-link">
             Don't have an account? <Link to="/register">Register</Link>
           </p>

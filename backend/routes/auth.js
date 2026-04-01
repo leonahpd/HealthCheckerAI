@@ -17,6 +17,18 @@ router.post('/login', [
   body('password').notEmpty().withMessage('Password is required')
 ], authController.login);
 
+// 🔥 NEW: Forgot Password
+router.post('/forgot-password', [
+  body('email').isEmail().withMessage('Valid email is required')
+], authController.forgotPassword);
+
+// 🔥 NEW: Reset Password
+router.post('/reset-password/:token', [
+  body('password')
+    .isLength({ min: 6 })
+    .withMessage('Password must be at least 6 characters')
+], authController.resetPassword);
+
 // Get current user
 router.get('/me', auth, authController.getMe);
 
