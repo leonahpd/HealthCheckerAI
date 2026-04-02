@@ -9,6 +9,8 @@ import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import PatientsPage from './pages/PatientsPage';
 import SymptomCheckerPage from './pages/SymptomCheckerPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
 
 // ✅ New Auth UI Components
 import ForgotPassword from './components/Auth/ForgotPassword';
@@ -25,8 +27,8 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
 
           {/* ✅ Updated Routes */}
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
 
           {/* Protected Routes */}
           <Route
