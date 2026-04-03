@@ -1,47 +1,74 @@
 import React, { useState } from 'react';
 import api from '../services/api';
+import './ForgotPasswordPage.css';
+import { toast } from 'react-toastify';
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState('');
-  const [success, setSuccess] = useState('');
-  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [cooldown, setCooldown] = useState(0);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSuccess('');
-    setError('');
+
+    if (!email) {
+      return toast.error('Please enter your email');
+    }
+
+    setLoading(true);
 
     try {
       const res = await api.post('/auth/forgot-password', { email });
-      // Backend returns a message, not the actual link
-      setSuccess(res.data.message || 'If that email exists, a reset link has been sent.');
+
+      toast.success(res.data.message || 'Reset link sent!');
+      startCooldown();
+
     } catch (err) {
-      console.error(err);
-      setError(
-        err.response?.data?.error || 'Something went wrong. Please try again later.'
-      );
+      toast.error(err.response?.data?.error || 'Something went wrong');
+    } finally {
+      setLoading(false);
     }
   };
 
-  return (
-    <div style={{ maxWidth: 400, margin: '0 auto', padding: 20 }}>
-      <h2>Forgot Password</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={{ width: '100%', padding: 8, marginBottom: 10 }}
-        />
-        <button type="submit" style={{ padding: 10, width: '100%' }}>
-          Send Reset Link
-        </button>
-      </form>
+  const startCooldown = () => {
+    let time = 30; // 30 seconds
+    setCooldown(time);
 
-      {success && <p style={{ color: 'green', marginTop: 10 }}>{success}</p>}
-      {error && <p style={{ color: 'red', marginTop: 10 }}>{error}</p>}
+    const interval = setInterval(() => {
+      time--;
+      setCooldown(time);
+
+      if (time <= 0) clearInterval(interval);
+    }, 1000);
+  };
+
+  return (
+    <div className="forgot-container">
+      <div className="forgot-card">
+        <h2>🔐 Forgot Password</h2>
+        <p>Enter your email to receive a reset link</p>
+
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <span className="icon">✉️</span>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          <button type="submit" disabled={loading || cooldown > 0}>
+            {loading
+              ? 'Sending...'
+              : cooldown > 0
+              ? `Resend in ${cooldown}s`
+              : 'Send Reset Link'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

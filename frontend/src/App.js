@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/Auth/PrivateRoute';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Pages
 import LoginPage from './pages/LoginPage';
@@ -12,21 +14,30 @@ import SymptomCheckerPage from './pages/SymptomCheckerPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 
-// ✅ New Auth UI Components
-import ForgotPassword from './components/Auth/ForgotPassword';
-import ResetPassword from './components/Auth/ResetPassword';
-
 function App() {
   return (
     <AuthProvider>
       <Router>
+
+        {/* ✅ GLOBAL TOAST */}
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          pauseOnHover
+          draggable
+          theme="colored"
+        />
+
         <Routes>
 
           {/* Public Routes */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
 
-          {/* ✅ Updated Routes */}
+          {/* Auth Routes */}
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
 

@@ -31,10 +31,8 @@ exports.register = async (req, res) => {
     const userExists = await User.findOne({ email });
     if (userExists) return res.status(400).json({ error: 'User already exists' });
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const user = await User.create({ name, email, password: hashedPassword });
+    // ❌ REMOVE bcrypt here
+    const user = await User.create({ name, email, password });
 
     const token = generateToken(user._id);
 
@@ -51,7 +49,6 @@ exports.register = async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 };
-
 // ================= LOGIN =================
 exports.login = async (req, res) => {
   try {
@@ -125,7 +122,6 @@ exports.forgotPassword = async (req, res) => {
     res.status(500).json({ error: 'Email could not be sent' });
   }
 };
-
 // ================= RESET PASSWORD =================
 exports.resetPassword = async (req, res) => {
   try {
@@ -144,14 +140,13 @@ exports.resetPassword = async (req, res) => {
 
     if (!user) return res.status(400).json({ error: 'Invalid or expired token' });
 
-    // ✅ Hash the new password
-    const hashedPassword = await bcrypt.hash(password, 10);
-    user.password = hashedPassword;
+    // ❌ REMOVE bcrypt here
+    user.password = password;
 
     user.resetPasswordToken = undefined;
     user.resetPasswordExpires = undefined;
 
-    await user.save();
+    await user.save(); // ✅ model will hash
 
     res.json({ message: 'Password reset successful! You can now login.' });
 
