@@ -37,62 +37,88 @@ A full-stack web application for healthcare symptom checking with AI-powered ana
 ## 📁 Project Structure
 
 ```
-├── backend/
-│   ├── config/
-│   │   └── database.js          # MongoDB connection
-│   ├── controllers/
-│   │   ├── authController.js    # Authentication logic
-│   │   ├── patientController.js # Patient CRUD operations
-│   │   └── symptomController.js # Symptom checker logic
-│   ├── middleware/
-│   │   └── auth.js              # JWT verification
-│   ├── models/
-│   │   ├── User.js              # User schema
-│   │   ├── Patient.js           # Patient schema
-│   │   └── SymptomQuery.js      # Symptom query schema
-│   ├── routes/
-│   │   ├── auth.js              # Auth routes
-│   │   ├── patients.js          # Patient routes
-│   │   └── symptoms.js          # Symptom routes
-│   ├── utils/
-│   │   └── aiService.js         # Hugging Face API integration
-│   ├── .env                     # Environment variables
-│   ├── package.json
-│   └── server.js                # Entry point
-│
-├── frontend/
-│   ├── public/
-│   │   └── index.html
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Auth/
-│   │   │   │   ├── Login.js
-│   │   │   │   ├── Register.js
-│   │   │   │   └── PrivateRoute.js
-│   │   │   └── Layout/
-│   │   │       ├── Header.js
-│   │   │       ├── Sidebar.js
-│   │   │       └── Layout.js
-│   │   ├── context/
-│   │   │   └── AuthContext.js   # Authentication context
-│   │   ├── pages/
-│   │   │   ├── LoginPage.js
-│   │   │   ├── RegisterPage.js
-│   │   │   ├── DashboardPage.js
-│   │   │   ├── PatientsPage.js
-│   │   │   └── SymptomCheckerPage.js
-│   │   ├── services/
-│   │   │   ├── api.js           # Axios instance
-│   │   │   └── auth.js          # Auth service
-│   │   ├── App.js
-│   │   ├── index.js
-│   │   └── index.css
-│   ├── .env
-│   └── package.json
-│
-├── setup.ps1                    # Automated setup script
-└── README.md                    # This file
-```
+
+
+├── backend
+│   ├── config
+│   │   └── database.js
+│   ├── controllers
+│   │   ├── authController.js
+│   │   ├── patientController.js
+│   │   └── symptomController.js
+│   ├── Dockerfile
+│   ├── middleware
+│   │   └── auth.js
+│   ├── models
+│   │   ├── Patient.js
+│   │   ├── SymptomQuery.js
+│   │   └── User.js
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── README.md
+│   ├── routes
+│   │   ├── auth.js
+│   │   ├── patients.js
+│   │   └── symptoms.js
+│   ├── server.js
+│   └── utils
+│       ├── aiService.js
+│       ├── emailService.js
+│       └── emailTemplates.js
+├── frontend
+│   ├── Dockerfile
+│   ├── nginx
+│   │   └── default.conf
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── public
+│   │   └── index.html
+│   └── src
+│       ├── App.js
+│       ├── components
+│       │   ├── Auth
+│       │   │   ├── Auth.css
+│       │   │   ├── ForgotPassword.css
+│       │   │   ├── ForgotPassword.js
+│       │   │   ├── Login.js
+│       │   │   ├── PrivateRoute.js
+│       │   │   ├── Register.js
+│       │   │   ├── ResetPassword.css
+│       │   │   └── ResetPassword.js
+│       │   └── Layout
+│       │       ├── Header.css
+│       │       ├── Header.js
+│       │       ├── Layout.css
+│       │       ├── Layout.js
+│       │       ├── Sidebar.css
+│       │       └── Sidebar.js
+│       ├── context
+│       │   └── AuthContext.js
+│       ├── index.css
+│       ├── index.js
+│       ├── pages
+│       │   ├── DashboardPage.css
+│       │   ├── DashboardPage.js
+│       │   ├── ForgotPasswordPage.css
+│       │   ├── ForgotPasswordPage.js
+│       │   ├── LoginPage.js
+│       │   ├── PatientsPage.css
+│       │   ├── PatientsPage.js
+│       │   ├── RegisterPage.js
+│       │   ├── ResetPasswordPage.css
+│       │   ├── ResetPasswordPage.js
+│       │   ├── SymptomCheckerPage.css
+│       │   └── SymptomCheckerPage.js
+│       └── services
+│           ├── api.js
+│           └── auth.js
+├── k8s
+│   ├── backend.yaml
+│   ├── frontend.yaml
+│   └── mongodb.yaml
+└── README.md
+
+
 
 ## 🚦 Getting Started
 
