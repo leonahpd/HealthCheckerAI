@@ -168,12 +168,12 @@ cd cd /HealthChecker-AI/fronend
 
 # create docker image 
 docker build -t healthai-frontend .
-docker tag healthai-frontend   healthai-frontend:latest
+docker tag healthai-frontend   <docker_registry_username>/healthai-frontend:latest
 
 #Push your image to your Docker registry
 docker login <registry>
 
-docker push leonahpd/healthai-frontend:latest
+docker push <docker_registry_username>/healthai-frontend:latest
 
 # create the frontend deployment pod
 
