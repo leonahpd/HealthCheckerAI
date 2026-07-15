@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: leonahpd/healthai-frontend:latest
+          image: docker.io/healthai-frontend:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80
