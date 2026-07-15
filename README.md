@@ -138,29 +138,15 @@ git clone <repository-url>
 cd un
 ```
 
-#### 2. Backend Setup
+#### 2. installation 
 
 ```bash
-cd backend
+ 
 
 # Install dependencies
-npm install
+  Kubernetes cluster 
 
-# Create .env file
-# Copy the following and update with your credentials:
-PORT=5000
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret_key
-AI_API_KEY=your_huggingface_api_key
-HF_API_KEY=your_huggingface_api_key
-AI_MODEL=mistralai/Mistral-7B-Instruct-v0.2
-NODE_ENV=development
 
-# Start the server
-npm start
-
-# For development with auto-reload
-npm run dev
 ```
 
 The backend will run on **http://localhost:5000**
