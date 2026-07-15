@@ -55,7 +55,6 @@ A full-stack web application for healthcare symptom checking with AI-powered ana
 │   │   └── User.js
 │   ├── package.json
 │   ├── package-lock.json
-│   ├── README.md
 │   ├── routes
 │   │   ├── auth.js
 │   │   ├── patients.js
