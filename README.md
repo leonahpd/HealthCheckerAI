@@ -227,7 +227,7 @@ kubectl create configmap backend-config \
 
 cd /HealthChecker-AI/k8s 
 
-kubectl create -f database.yaml
+kubectl create -f mongodb.yaml
 
 ## 🔧 Configuration
 
@@ -247,7 +247,7 @@ kubectl create -f database.yaml
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `REACT_APP_API_URL` | Backend API URL | http://localhost:5000/api |
+| `REACT_APP_API_URL` | Backend API URL | http://<NODE_PORT_IP>:5000/api |
 
 ## 📡 API Endpoints
 
