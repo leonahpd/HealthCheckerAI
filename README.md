@@ -144,42 +144,79 @@ cd un
  
 
 # Install dependencies
-  Kubernetes cluster 
+  Kubernetes cluster ( single node cluter )
+  install docker 
+
+  1. login to the control node
+
+     git clone <git URL>
+      
 
 
 ```
 
 The backend will run on **http://localhost:5000**
 
-#### 3. Frontend Setup
+#### 3. Frontend  pod setup 
 
 ```bash
-cd frontend
+cd cd /HealthChecker-AI/fronend
 
-# Install dependencies
-npm install
 
-# Create .env file (optional)
-REACT_APP_API_URL=http://localhost:5000/api
+# create docker image 
+docker build -t healthai-frontend .
+docker tag healthai-frontend   healthai-frontend:latest
 
-# Start the development server
-npm start
+#Push your image to your Docker registry
+docker login <registry>
+
+docker push leonahpd/healthai-frontend:latest
+
+# create the frontend deployment pod
+
+cd /HealthChecker-AI/k8s 
+kubectl create -f frontend.yaml
+
+# 
 ```
 
 The frontend will run on **http://localhost:3000**
 
-### Quick Setup (Windows PowerShell)
+### BACKEND Pod setup 
 
-Run the automated setup script:
+```bash
+cd /HealthChecker-AI/backend
 
-```powershell
-.\setup.ps1
+# create docker image
+
+docker build -t healthai-backend .
+docker tag healthai-frontend   healthai-backend:latest
+
+#Push your image to your Docker registry
+docker login <registry>
+
+docker push healthai-backend:latest
+
+# create the frontend deployment pod
+
+cd /HealthChecker-AI/k8s 
+kubectl create -f backend.yaml
+
+
+
+kubectl create secret generic backend-secrets \
+  --from-literal=EMAIL_USER= <EMAIL_ID> \
+  --from-literal=EMAIL_PASS= <TOKEN> \
+  --from-literal=JWT_SECRET=supersecretkey123
+
+kubectl create configmap backend-config \
+  --from-literal=EMAIL_HOST=smtp.gmail.com \
+  --from-literal=EMAIL_PORT=587 \
+  --from-literal=FRONTEND_URL=http://<IP>:32019 \
+  --from-literal=JWT_EXPIRE=30d
+
+# 
 ```
-
-This will:
-- Install backend dependencies
-- Install frontend dependencies
-- Start both servers concurrently
 
 ## 🔧 Configuration
 
