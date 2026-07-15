@@ -159,7 +159,7 @@ cd HealthChecker-AI
 
 ```
 
-The backend will run on **http://localhost:5000**
+
 
 #### 3. Frontend  pod setup 
 
@@ -184,7 +184,7 @@ kubectl create -f frontend.yaml
 # 
 ```
 
-The frontend will run on **http://localhost:3000**
+The frontend will run on **http://<NODE_PORT_IP>:3000**
 
 ### BACKEND Pod setup 
 
@@ -288,35 +288,7 @@ kubectl create -f mongodb.yaml
 - CORS configuration
 - Input validation
 
-## 🧪 Testing
 
-```bash
-# Backend tests
-cd backend
-npm test
-
-# Frontend tests
-cd frontend
-npm test
-```
-
-## 📦 Building for Production
-
-### Backend
-
-```bash
-cd backend
-NODE_ENV=production npm start
-```
-
-### Frontend
-
-```bash
-cd frontend
-npm run build
-```
-
-The optimized production build will be in the `build/` directory.
 
 
  
