@@ -134,8 +134,11 @@ A full-stack web application for healthcare symptom checking with AI-powered ana
 #### 1. Clone the Repository
 
 ```bash
+
 git clone <repository-url>
-cd un
+
+cd HealthChecker-AI
+
 ```
 
 #### 2. installation 
@@ -144,6 +147,7 @@ cd un
  
 
 # Install dependencies
+
   Kubernetes cluster ( single node cluter )
   install docker 
 
@@ -203,6 +207,7 @@ cd /HealthChecker-AI/k8s
 kubectl create -f backend.yaml
 
 
+#Create the secret for email configuration
 
 kubectl create secret generic backend-secrets \
   --from-literal=EMAIL_USER= <EMAIL_ID> \
@@ -217,6 +222,12 @@ kubectl create configmap backend-config \
 
 # 
 ```
+
+# DATABASE POD
+
+cd /HealthChecker-AI/k8s 
+
+kubectl create -f database.yaml
 
 ## 🔧 Configuration
 
