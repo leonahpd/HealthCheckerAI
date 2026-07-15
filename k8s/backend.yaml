@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: leonahpd/healthai-backend:latest
+          image: docker.io/healthai-backend:latest
           ports:
             - containerPort: 5000
           env:
@@ -72,7 +72,7 @@ kind: Service
 metadata:
   name: backend-service
 spec:
-  type: NodePort   # ✅ ADD THIS
+  type: NodePort   
   selector:
     app: backend
   ports:
